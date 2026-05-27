@@ -1,9 +1,9 @@
 import { Room, Client, CloseCode } from "colyseus";
-import { MyRoomState } from "./schema/MyRoomState.js";
+import { SpadesState } from "./schema/SpadesState.js";
 
-export class MyRoom extends Room {
+export class Spades extends Room {
   maxClients = 4;
-  state = new MyRoomState();
+  state = new SpadesState();
 
   messages = {
     yourMessageType: (client: Client, message: any) => {
