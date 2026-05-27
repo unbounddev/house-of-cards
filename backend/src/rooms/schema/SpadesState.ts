@@ -11,8 +11,6 @@ class Player extends Schema {
   @type([ Card ]) hand = new ArraySchema<Card>();
 }
 
-
-
 export class SpadesState extends Schema {
   @type({ map: Player }) players = new MapSchema<Player>();
   @type([ Card ]) table = new ArraySchema<Card>();
