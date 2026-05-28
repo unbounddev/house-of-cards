@@ -65,6 +65,10 @@ export class JoinDialog extends HTMLElement {
             <input type="text" />
             <button type="submit">Join</button>
         `
+        this.submitBtn = this.form.querySelector("button");
+        this.submitBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+        })
     }
 
     show(){
