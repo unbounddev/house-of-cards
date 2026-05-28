@@ -1,6 +1,7 @@
 import { Scene } from "phaser";
 import { SCENES } from "../scenes";
 import { Client } from "@colyseus/sdk";
+import { JoinDialog } from "../components/JoinDialog";
 
 export class CreateOrJoin extends Scene {
     constructor(){
@@ -11,6 +12,8 @@ export class CreateOrJoin extends Scene {
         /** @type {Client} */
         const client = this.registry.get("client");
         const game = this.registry.get("game");
+        /** @type {JoinDialog} */
+        const joinDialog = this.registry.get("joinDialog");
         const createBtn = this.add.rectangle(this.scale.width/2, this.scale.height/2-100, Math.min(this.scale.width*0.8, 750), 150, 0xffffff, 0);
         createBtn.setStrokeStyle(16, 0xffffff, 1);
         const createText = this.add.text(this.scale.width/2, this.scale.height/2-100, ("Create").toUpperCase(), {
@@ -48,12 +51,16 @@ export class CreateOrJoin extends Scene {
 
         createBtn.on('pointerdown', async () => {
             try {
-                const room = await client.joinOrCreate(game);
+                const room = await client.create(game);
                 this.registry.set('room', room);
                 this.scene.start(SCENES.GAME);
             } catch (e){
                 // TODO: show error message
             }
+        })
+
+        joinBtn.on('pointerdown', async () => {
+            joinDialog.show();
         })
     }
 }

@@ -1,6 +1,7 @@
 import { Scene } from 'phaser';
 import { SCENES } from '../scenes';
 import { Client } from "@colyseus/sdk";
+import { JoinDialog } from '../components/JoinDialog';
 
 export class Preloader extends Scene
 {
@@ -40,6 +41,10 @@ export class Preloader extends Scene
         const client = new Client(import.meta.env.VITE_SERVER_URL);
         this.registry.set('isMobile', this.game.config.width < this.game.config.height);
         this.registry.set('client', client);
+        customElements.define('join-dialog', JoinDialog);
+        const joinDialog = document.createElement("join-dialog");
+        document.body.append(joinDialog);
+        this.registry.set('joinDialog', joinDialog);
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start(SCENES.MAIN_MENU);
     }
