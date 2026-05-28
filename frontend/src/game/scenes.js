@@ -3,5 +3,6 @@ export const SCENES = {
     GAME: "game",
     GAME_OVER: "game-over",
     MAIN_MENU: "main-menu",
-    PRELOADER: "preloader"
+    PRELOADER: "preloader",
+    CREATE_OR_JOIN: "create-or-join"
 }

@@ -23,6 +23,7 @@
     "vite": "^6.3.1"
   },
   "dependencies": {
+    "@colyseus/sdk": "^0.17.42",
     "phaser": "4.0.0"
   }
 }

@@ -22,7 +22,7 @@ export class MainMenu extends Scene
         this.add.text(this.scale.width/2, this.scale.height/6, ("Select Game").toUpperCase(), {
             fontSize: 64, fontFamily: "Arial", fontStyle: "bold"
         }).setOrigin(0.5, 0.5);
-
+        // TODO: Handle multiple pages of games
         for(let i = 0; i < gameOptionHeights[String(isMobile)].length; i++){
             if (i > games.length-1){ break; }
             const game = games[i];
@@ -37,17 +37,18 @@ export class MainMenu extends Scene
                 gameBtn.setFillStyle(0xffffff, 1);
                 gameBtnText.setColor(this.game.config.backgroundColor.rgba);
                 document.body.style.cursor = "pointer";
-            })
+            });
             gameBtn.on('pointerout', () => {
                 gameBtn.setFillStyle(0xffffff, 0);
                 gameBtnText.setColor("#fff");
                 document.body.style.cursor = "default";
-            })
+            });
             gameBtn.on('pointerdown', () => {
                 gameBtn.setFillStyle(0xffffff, 1);
                 gameBtnText.setColor(this.game.config.backgroundColor.rgba);
                 setTimeout(() => {
-                    this.scene.start(SCENES.GAME)
+                    this.registry.set('game', gameBtn.getData('game'));
+                    this.scene.start(SCENES.CREATE_OR_JOIN);
                 }, 200);
             })
         }
