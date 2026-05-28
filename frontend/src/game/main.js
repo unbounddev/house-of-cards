@@ -7,10 +7,24 @@ import { AUTO, Game, Scale } from 'phaser';
 
 //  Find out more information about the Game Config at:
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
+const getGameDimensions = () => {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    if (width >= height){
+        width = 1920;
+        height = 1080;
+    } else {
+        width = 390*3;
+        height = 844*3;
+    }
+
+    return { width, height };
+}
+
+
 const config = {
     type: AUTO,
-    width: 390*3,
-    height: 844*3,
     parent: 'game-container',
     backgroundColor: '#028af8',
     scale: {
@@ -27,9 +41,8 @@ const config = {
 };
 
 const StartGame = (parent) => {
-
-    return new Game({ ...config, parent });
-
+    const dimensions = getGameDimensions();
+    return new Game({ ...config, ...dimensions, parent });
 }
 
 export default StartGame;
