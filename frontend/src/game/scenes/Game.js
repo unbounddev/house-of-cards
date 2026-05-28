@@ -1,11 +1,12 @@
 import { Scene } from 'phaser';
 import { CardTexture } from '../utils/utils';
+import { SCENES } from '../scenes';
 
 export class Game extends Scene
 {
     constructor ()
     {
-        super('Game');
+        super(SCENES.GAME);
     }
 
     create ()
@@ -22,7 +23,7 @@ export class Game extends Scene
 
         this.input.once('pointerdown', () => {
 
-            this.scene.start('GameOver');
+            this.scene.start(SCENES.GAME_OVER);
 
         });
     }

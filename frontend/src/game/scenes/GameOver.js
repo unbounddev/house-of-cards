@@ -1,10 +1,11 @@
 import { Scene } from 'phaser';
+import { SCENES } from '../scenes';
 
 export class GameOver extends Scene
 {
     constructor ()
     {
-        super('GameOver');
+        super(SCENES.GAME_OVER);
     }
 
     create ()
@@ -19,7 +20,7 @@ export class GameOver extends Scene
 
         this.input.once('pointerdown', () => {
 
-            this.scene.start('MainMenu');
+            this.scene.start(SCENES.MAIN_MENU);
 
         });
     }

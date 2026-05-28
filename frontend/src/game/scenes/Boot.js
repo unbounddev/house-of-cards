@@ -1,10 +1,11 @@
 import { Scene } from 'phaser';
+import { SCENES } from '../scenes';
 
 export class Boot extends Scene
 {
     constructor ()
     {
-        super('Boot');
+        super(SCENES.BOOT);
     }
 
     preload ()
@@ -13,6 +14,6 @@ export class Boot extends Scene
 
     create ()
     {
-        this.scene.start('Preloader');
+        this.scene.start(SCENES.PRELOADER);
     }
 }
