@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import { CardTexture } from '../utils/utils';
 
 export class Game extends Scene
 {
@@ -16,6 +17,8 @@ export class Game extends Scene
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
+
+        this.add.image(this.scale.width/2, this.scale.height/2, 'cards', CardTexture('C', 'A'))
 
         this.input.once('pointerdown', () => {
 
