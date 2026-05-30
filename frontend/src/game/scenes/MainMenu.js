@@ -1,6 +1,7 @@
 import { Scene } from 'phaser';
 import { SCENES } from '../scenes';
 import { games } from '../../../../shared/games';
+import { REGISTRY } from '../consts';
 
 export class MainMenu extends Scene
 {
@@ -17,7 +18,7 @@ export class MainMenu extends Scene
             false: [this.scale.height/3, (this.scale.height/3)+200, (this.scale.height/3)+400]
         }
         /** @type {boolean} */
-        const isMobile = this.registry.get('isMobile');
+        const isMobile = this.registry.get(REGISTRY.IS_MOBILE);
 
         this.add.text(this.scale.width/2, this.scale.height/6, ("Select Game").toUpperCase(), {
             fontSize: 64, fontFamily: "Arial", fontStyle: "bold"
@@ -47,7 +48,7 @@ export class MainMenu extends Scene
                 gameBtn.setFillStyle(0xffffff, 1);
                 gameBtnText.setColor(this.game.config.backgroundColor.rgba);
                 setTimeout(() => {
-                    this.registry.set('game', gameBtn.getData('game'));
+                    this.registry.set(REGISTRY.GAME, gameBtn.getData('game'));
                     this.scene.start(SCENES.CREATE_OR_JOIN);
                 }, 200);
             })

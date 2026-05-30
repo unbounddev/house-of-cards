@@ -62,12 +62,24 @@ export class JoinDialog extends HTMLElement {
         this.shadow.append(this.dialog);
         this.form.innerHTML = `
             <label>Join Code</label>
-            <input type="text" />
+            <input type="text" name="code" />
             <button type="submit">Join</button>
         `
-        this.submitBtn = this.form.querySelector("button");
-        this.submitBtn.addEventListener("click", (e) => {
+        this.form.addEventListener("submit", (e) => {
             e.preventDefault();
+            let data = new FormData(e.target);
+            data = Object.fromEntries(data.entries());
+
+            console.log(data.code)
+            // TODO: Add toast that code must not be empty
+            if (!data.code.trim()) return;
+            const submitEvent = new CustomEvent("submit", {
+                detail: {
+                    code: data.code.trim()
+                }
+            })
+
+            this.dispatchEvent(submitEvent)
         })
     }
 

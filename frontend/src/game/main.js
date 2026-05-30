@@ -5,6 +5,8 @@ import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
 import { CreateOrJoin } from './scenes/CreateOrJoin';
 import { AUTO, Game, Scale } from 'phaser';
+import { Lobby } from './scenes/Lobby';
+import { Spades } from './scenes/Spades';
 
 //  Find out more information about the Game Config at:
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
@@ -23,6 +25,10 @@ const getGameDimensions = () => {
     return { width, height };
 }
 
+const GameScenes = [
+    Spades
+]
+
 
 const config = {
     type: AUTO,
@@ -38,7 +44,9 @@ const config = {
         MainMenu,
         CreateOrJoin,
         MainGame,
-        GameOver
+        GameOver,
+        Lobby,
+        ...GameScenes
     ]
 };
 

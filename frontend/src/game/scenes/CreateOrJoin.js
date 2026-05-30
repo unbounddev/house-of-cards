@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 import { SCENES } from "../scenes";
 import { Client } from "@colyseus/sdk";
 import { JoinDialog } from "../components/JoinDialog";
+import { REGISTRY } from "../consts";
 
 export class CreateOrJoin extends Scene {
     constructor(){
@@ -10,10 +11,10 @@ export class CreateOrJoin extends Scene {
 
     create() {
         /** @type {Client} */
-        const client = this.registry.get("client");
-        const game = this.registry.get("game");
+        const client = this.registry.get(REGISTRY.CLIENT);
+        const game = this.registry.get(REGISTRY.GAME);
         /** @type {JoinDialog} */
-        const joinDialog = this.registry.get("joinDialog");
+        const joinDialog = this.registry.get(REGISTRY.JOIN_DIALOG);
         const createBtn = this.add.rectangle(this.scale.width/2, this.scale.height/2-100, Math.min(this.scale.width*0.8, 750), 150, 0xffffff, 0);
         createBtn.setStrokeStyle(16, 0xffffff, 1);
         const createText = this.add.text(this.scale.width/2, this.scale.height/2-100, ("Create").toUpperCase(), {
@@ -52,15 +53,27 @@ export class CreateOrJoin extends Scene {
         createBtn.on('pointerdown', async () => {
             try {
                 const room = await client.create(game);
-                this.registry.set('room', room);
-                this.scene.start(SCENES.GAME);
+                this.registry.set(REGISTRY.ROOM, room);
+                this.scene.start(SCENES.LOBBY);
             } catch (e){
                 // TODO: show error message
             }
         })
 
         joinBtn.on('pointerdown', async () => {
+            this.input.enabled = false;
             joinDialog.show();
+        })
+
+        joinDialog.addEventListener("submit", async (e) => {
+            try {
+                const room = await client.joinById(e.detail.code);
+                this.registry.set(REGISTRY.ROOM, room);
+                joinDialog.hide();
+                this.scene.start(SCENES.LOBBY);
+            } catch (e) {
+                // TODO: show error message
+            }
         })
     }
 }

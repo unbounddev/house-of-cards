@@ -1,5 +1,5 @@
-import { Room, Client, CloseCode } from "colyseus";
-import { SpadesState } from "./schema/SpadesState.js";
+import { Room, Client, CloseCode, AuthContext } from "colyseus";
+import { Player, SpadesState } from "./schema/SpadesState.js";
 
 export class Spades extends Room {
   maxClients = 4;
@@ -20,11 +20,16 @@ export class Spades extends Room {
      */
   }
 
+  onAuth(client: Client, options: any, context: AuthContext) {
+    return !this.state.started;
+  }
+
   onJoin (client: Client, options: any) {
     /**
      * Called when a client joins the room.
      */
-    console.log(client.sessionId, "joined!");
+    // console.log(client.sessionId, "joined!");
+    this.state.players.set(client.sessionId, new Player(client.sessionId, "Player"));
   }
 
   onLeave (client: Client, code: CloseCode) {
@@ -32,6 +37,7 @@ export class Spades extends Room {
      * Called when a client leaves the room.
      */
     console.log(client.sessionId, "left!", code);
+    this.state.players.delete(client.sessionId);
   }
 
   onDispose() {
