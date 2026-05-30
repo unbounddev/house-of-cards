@@ -38,6 +38,9 @@ export class Spades extends Room {
      */
     console.log(client.sessionId, "left!", code);
     this.state.players.delete(client.sessionId);
+    if (this.state.started){
+      this.disconnect();
+    }
   }
 
   onDispose() {

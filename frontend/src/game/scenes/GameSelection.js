@@ -3,11 +3,11 @@ import { SCENES } from '../scenes';
 import { games } from '../../../../shared/games';
 import { REGISTRY } from '../consts';
 
-export class MainMenu extends Scene
+export class GameSelection extends Scene
 {
     constructor ()
     {
-        super(SCENES.MAIN_MENU);
+        super(SCENES.GAME_SELECTION);
     }
 
     create ()
@@ -19,6 +19,8 @@ export class MainMenu extends Scene
         }
         /** @type {boolean} */
         const isMobile = this.registry.get(REGISTRY.IS_MOBILE);
+        /** @type {Client} */
+        const client = this.registry.get(REGISTRY.CLIENT);
 
         this.add.text(this.scale.width/2, this.scale.height/6, ("Select Game").toUpperCase(), {
             fontSize: 64, fontFamily: "Arial", fontStyle: "bold"
@@ -47,9 +49,17 @@ export class MainMenu extends Scene
             gameBtn.on('pointerdown', () => {
                 gameBtn.setFillStyle(0xffffff, 1);
                 gameBtnText.setColor(this.game.config.backgroundColor.rgba);
-                setTimeout(() => {
-                    this.registry.set(REGISTRY.GAME, gameBtn.getData('game'));
-                    this.scene.start(SCENES.CREATE_OR_JOIN);
+                setTimeout(async () => {
+                    try {
+                        const game = gameBtn.getData('game')
+                        this.registry.set(REGISTRY.GAME, game);
+                        const room = await client.create(game.name);
+                        this.registry.set(REGISTRY.ROOM, room);
+                        this.scene.start(SCENES.LOBBY);
+                    } catch (e) {
+                        // TODO: Handle Error
+                    }
+                    
                 }, 200);
             })
         }

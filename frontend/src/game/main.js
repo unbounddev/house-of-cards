@@ -7,6 +7,7 @@ import { CreateOrJoin } from './scenes/CreateOrJoin';
 import { AUTO, Game, Scale } from 'phaser';
 import { Lobby } from './scenes/Lobby';
 import { Spades } from './scenes/Spades';
+import { GameSelection } from './scenes/GameSelection';
 
 //  Find out more information about the Game Config at:
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
@@ -43,6 +44,7 @@ const config = {
         Preloader,
         MainMenu,
         CreateOrJoin,
+        GameSelection,
         MainGame,
         GameOver,
         Lobby,

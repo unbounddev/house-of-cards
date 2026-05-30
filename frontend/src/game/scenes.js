@@ -3,6 +3,7 @@ export const SCENES = {
     PRELOADER: "preloader",
     MAIN_MENU: "main-menu",
     CREATE_OR_JOIN: "create-or-join",
+    GAME_SELECTION: "game-selection",
     LOBBY: "lobby",
     GAME: "game",
     GAME_OVER: "game-over",

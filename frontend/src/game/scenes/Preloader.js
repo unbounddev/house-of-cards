@@ -47,6 +47,6 @@ export class Preloader extends Scene
         document.body.append(joinDialog);
         this.registry.set(REGISTRY.JOIN_DIALOG, joinDialog);
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start(SCENES.MAIN_MENU);
+        this.scene.start(SCENES.CREATE_OR_JOIN);
     }
 }
