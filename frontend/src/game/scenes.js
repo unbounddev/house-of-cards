@@ -1,3 +1,5 @@
+import { GAME_NAMES } from "../../../shared/games";
+
 export const SCENES = {
     BOOT: "boot",
     PRELOADER: "preloader",
@@ -8,5 +10,5 @@ export const SCENES = {
     GAME: "game",
     GAME_OVER: "game-over",
 
-    SPADES: "spades",
+    ...GAME_NAMES
 }
