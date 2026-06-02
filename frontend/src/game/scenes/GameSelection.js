@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
 import { SCENES } from '../scenes';
-import { games } from '../../../../shared/games';
+import { GAMES } from '../../../../shared/games';
 import { REGISTRY } from '../consts';
 
 export class GameSelection extends Scene
@@ -21,6 +21,7 @@ export class GameSelection extends Scene
         const isMobile = this.registry.get(REGISTRY.IS_MOBILE);
         /** @type {Client} */
         const client = this.registry.get(REGISTRY.CLIENT);
+        const games = Object.values(GAMES);
 
         this.add.text(this.scale.width/2, this.scale.height/6, ("Select Game").toUpperCase(), {
             fontSize: 64, fontFamily: "Arial", fontStyle: "bold"
@@ -51,6 +52,7 @@ export class GameSelection extends Scene
                 gameBtnText.setColor(this.game.config.backgroundColor.rgba);
                 setTimeout(async () => {
                     try {
+                        /** @type {import('../../../../shared/games').GameConfig} */
                         const game = gameBtn.getData('game')
                         this.registry.set(REGISTRY.GAME, game);
                         const room = await client.create(game.name);

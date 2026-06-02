@@ -1,8 +1,9 @@
-import { Room, Client, CloseCode, AuthContext } from "colyseus";
-import { Player, SpadesState } from "./schema/SpadesState.js";
+import { Room, Client, CloseCode, AuthContext, getMessageBytes } from "colyseus";
+import { Player, SpadesState } from "./SpadesState.js";
+import { GAME_NAMES, GAMES } from "../../../../shared/games.js";
 
 export class Spades extends Room {
-  maxClients = 4;
+  maxClients = GAMES[GAME_NAMES.SPADES].maxPlayers;
   state = new SpadesState();
 
   messages = {

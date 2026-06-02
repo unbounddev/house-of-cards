@@ -3,6 +3,7 @@ import { SCENES } from "../scenes";
 import { Client } from "@colyseus/sdk";
 import { JoinDialog } from "../components/JoinDialog";
 import { REGISTRY } from "../consts";
+import { GAMES } from "../../../../shared/games";
 
 export class CreateOrJoin extends Scene {
     constructor(){
@@ -62,10 +63,13 @@ export class CreateOrJoin extends Scene {
             try {
                 const room = await client.joinById(e.detail.code);
                 this.registry.set(REGISTRY.ROOM, room);
+                const game = GAMES[room.name];
+                this.registry.set(REGISTRY.GAME, game);
                 joinDialog.hide();
                 this.scene.start(SCENES.LOBBY);
             } catch (e) {
                 // TODO: show error message
+                console.log(e)
             }
         })
     }

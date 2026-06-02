@@ -10,14 +10,15 @@ import {
 /**
  * Import your Room files
  */
-import { Spades } from "./rooms/Spades.js";
+import { Spades } from "./rooms/Spades/Spades.js";
+import { GAME_NAMES, GAMES } from "../../shared/games.js";
 
 const server = defineServer({
     /**
      * Define your room handlers:
      */
     rooms: {
-        spades: defineRoom(Spades)
+        [GAMES[GAME_NAMES.SPADES].name]: defineRoom(Spades)
     },
 
     /**

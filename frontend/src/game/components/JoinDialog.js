@@ -70,7 +70,6 @@ export class JoinDialog extends HTMLElement {
             let data = new FormData(e.target);
             data = Object.fromEntries(data.entries());
 
-            console.log(data.code)
             // TODO: Add toast that code must not be empty
             if (!data.code.trim()) return;
             const submitEvent = new CustomEvent("submit", {

@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
 import { SCENES } from '../scenes';
-import { games } from '../../../../shared/games';
+import { GAMES } from '../../../../shared/games';
 import { REGISTRY } from '../consts';
 
 export class MainMenu extends Scene
